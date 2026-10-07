@@ -1,0 +1,11 @@
+import Link from "next/link";
+import { ArrowUpRight, Award, GraduationCap, Wrench } from "lucide-react";
+
+export function ResearchCredentials({ education, achievements, skills }: { education: Array<Record<string, unknown>>; achievements: Array<Record<string, unknown>>; skills: Array<Record<string, unknown>> }) {
+  const degree = education[0]; const achievement = achievements[0];
+  return <section className="lab-section border-y border-[var(--lab-line)]"><div className="mx-auto grid max-w-[1480px] md:grid-cols-3">
+    <Link href="/achievements" className="credential-cell group"><Award size={18} className="text-[var(--lab-amber)]" /><p className="mt-12 font-mono text-[8px] uppercase tracking-[.18em] text-[var(--lab-muted)]">Selected recognition</p><h3 className="mt-4 font-serif text-2xl text-white">{String(achievement?.title ?? "YOUR_MAJOR_ACHIEVEMENT")}</h3><p className="mt-3 text-xs leading-6 text-[var(--lab-muted)]">{String(achievement?.organization ?? "YOUR_ORGANIZATION")}</p><ArrowUpRight className="mt-8 transition group-hover:translate-x-1 group-hover:-translate-y-1" size={16} /></Link>
+    <Link href="/education" className="credential-cell group"><GraduationCap size={18} className="text-[var(--lab-cyan)]" /><p className="mt-12 font-mono text-[8px] uppercase tracking-[.18em] text-[var(--lab-muted)]">Academic foundation</p><h3 className="mt-4 font-serif text-2xl text-white">{String(degree?.degree ?? "YOUR_DEGREE")}</h3><p className="mt-3 text-xs leading-6 text-[var(--lab-muted)]">{String(degree?.institution ?? "YOUR_INSTITUTION")} · CGPA {String(degree?.cgpa ?? "YOUR_CGPA")}</p><ArrowUpRight className="mt-8 transition group-hover:translate-x-1 group-hover:-translate-y-1" size={16} /></Link>
+    <Link href="/skills" className="credential-cell group"><Wrench size={18} className="text-[var(--lab-violet)]" /><p className="mt-12 font-mono text-[8px] uppercase tracking-[.18em] text-[var(--lab-muted)]">Research capabilities</p><h3 className="mt-4 font-serif text-2xl text-white">Methods backed by use.</h3><p className="mt-3 text-xs leading-6 text-[var(--lab-muted)]">{skills.slice(0, 3).map((skill) => String(skill.name)).join(" · ") || "Computer vision · BioML · XAI"}</p><ArrowUpRight className="mt-8 transition group-hover:translate-x-1 group-hover:-translate-y-1" size={16} /></Link>
+  </div></section>;
+}

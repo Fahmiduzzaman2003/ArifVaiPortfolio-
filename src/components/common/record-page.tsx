@@ -1,0 +1,7 @@
+import { PageIntro } from "@/components/common/page-intro";
+import type { ResearchOrnamentVariant } from "@/components/common/research-ornament";
+
+export function RecordPage({ eyebrow, title, description, records, ornament = "neural" }: { eyebrow: string; title: string; description: string; records: Array<{ label: string; title: string; meta: string; body: string }>; ornament?: ResearchOrnamentVariant }) {
+  return <main className="lab-section"><PageIntro eyebrow={eyebrow} title={title} description={description} ornament={ornament} /><section className="mx-auto max-w-[1480px] px-4 py-20 md:px-8 md:py-28"><div className="border-l border-[var(--lab-line)] pl-5 md:pl-10">{records.map((record, i) => <article key={`${record.title}-${i}`} className="relative border-b border-[var(--lab-line)] py-10 first:pt-0"><span className="absolute -left-[2.05rem] top-10 grid size-6 place-items-center rounded-full border border-[var(--lab-cyan)] bg-[var(--lab-bg)] font-mono text-[7px] text-[var(--lab-cyan)] md:-left-[3.25rem]">0{i + 1}</span><p className="lab-kicker">{record.label}</p><div className="mt-5 grid gap-5 lg:grid-cols-[.8fr_1.2fr]"><div><h2 className="font-serif text-3xl text-white md:text-4xl">{record.title}</h2><p className="mt-3 font-mono text-[9px] uppercase tracking-wider text-[var(--lab-muted)]">{record.meta}</p></div><p className="max-w-3xl text-sm leading-7 text-[var(--lab-muted)]">{record.body}</p></div></article>)}</div></section></main>;
+}
+

@@ -1,0 +1,10 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Download } from "lucide-react";
+import { PageIntro } from "@/components/common/page-intro";
+import { Button } from "@/components/ui/button";
+import { getPublicProfile } from "@/services/public-content";
+
+export const metadata: Metadata = { title: "About" };
+export default async function AboutPage() { const profile = await getPublicProfile(); return <main className="lab-section"><PageIntro eyebrow="Academic biography" title="Research is a practice of careful questions and accountable evidence." description={profile.introduction} ornament="vision" /><section className="mx-auto grid max-w-[1480px] gap-14 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[.7fr_1.3fr]"><div className="publication-method-visual lg:sticky lg:top-28 lg:h-[70vh]"><div className="publication-contour"><span /><span /><span /></div><p className="absolute bottom-5 left-5 font-mono text-[8px] uppercase tracking-[.16em] text-[var(--lab-muted)]">Professional portrait / managed in admin</p></div><div className="grid content-start">{[["Academic biography", profile.biography ?? "YOUR_ACADEMIC_BIOGRAPHY"], ["Research philosophy", profile.philosophy ?? "YOUR_RESEARCH_PHILOSOPHY"], ["Motivation", profile.motivation ?? "YOUR_MOTIVATION"], ["Long-term research goals", profile.longTermGoals ?? "YOUR_LONG_TERM_RESEARCH_GOALS"], ["PhD objective", profile.phdObjective ?? "YOUR_PHD_OBJECTIVE"], ["Collaboration interests", profile.collaborationInterests ?? "YOUR_COLLABORATION_INTERESTS"]].map(([title, body], index) => <section key={title} className="grid gap-5 border-b border-[var(--lab-line)] py-9 first:pt-0 md:grid-cols-[55px_1fr]"><span className="font-mono text-[9px] text-[var(--lab-cyan)]">{String(index + 1).padStart(2, "0")}</span><div><h2 className="font-serif text-3xl text-white">{title}</h2><p className="mt-4 leading-8 text-[var(--lab-muted)]">{body}</p></div></section>)}<Button asChild className="mt-8 w-fit !bg-[var(--lab-cyan)] !text-[#061316]"><Link href="/cv"><Download size={16} /> View curriculum vitae</Link></Button></div></section></main>; }
+

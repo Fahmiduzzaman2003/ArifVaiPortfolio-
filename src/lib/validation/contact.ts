@@ -1,0 +1,2 @@
+import { z } from "zod";
+export const contactSchema = z.object({ name: z.string().trim().min(2).max(80), email: z.string().trim().email().max(160), institution: z.string().trim().max(160).optional(), subject: z.string().trim().min(3).max(140), inquiryType: z.enum(["PhD supervision", "Research collaboration", "Research assistantship", "Internship", "Other"]), message: z.string().trim().min(20).max(5000), website: z.string().max(0).optional() });
